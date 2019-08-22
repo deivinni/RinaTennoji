@@ -8,7 +8,7 @@ Hey... Eu sou apenas um bot para Discord, desenvolvido para ajudá-lo com o que 
 
  Categoria|Descrição|Total de comandos
 -|-|-
-[Informação](https://github.com/DEIVINNI/ShinobuKocho/blob/master/src/lib/commands/informações/CommandInfo.md#comandos-de-informações)|Comandos que demonstram informações de específicas coisas.|3
+[Informação](https://github.com/DEIVINNI/ShinobuKocho/blob/master/src/lib/commands/commands.md#comandos-de-informações)|Comandos que demonstram informações de específicas coisas.|3
 
 # Autor
 **Shinobu Kocho** © [DEIVINNI](https://github.com/DEIVINNI).  
