@@ -3,8 +3,8 @@ const { emojis, prefix, owner } = require('../../../util/config'),
 
 module.exports = (bot, msg) => {
   if (msg.author.bot) return;
-  if (msg.content.startsWith(prefix.toLowerCase())) {
-    const args = msg.content.slice(prefix.toLowerCase().length).trim().split(/\s+/g),
+  if (msg.content.startsWith(('s.'||'S.')) {
+    const args = msg.content.slice(prefix.length).trim().split(/\s+/g),
       comando = args.shift().toLowerCase(),
       cmd = bot.commands.get(comando) || bot.commands.get(bot.aliases.get(comando));
     if (cmd) {
