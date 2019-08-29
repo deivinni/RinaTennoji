@@ -5,3 +5,5 @@ Comando|Descrição|Habilitado
 Botinfo|Veja todas as minhas estatisticas.|Sim
 Help|Veja todos os meus comandos.|Sim
 Ping|Veja a minha latência.|Sim
+Serverinfo|Veja as informações do servidor.|Sim
+Uptime|veja o tempo em que eu estou online.|Sim
