@@ -4,7 +4,7 @@
 Hey... Eu sou apenas um bot para Discord, desenvolvido para ajudá-lo com o que você mais precisar!
 
 # Comandos
-> Esta são as categorias de meus comandos, clique em seu nome para todos os comandos de certa categoria!
+> Esta são as categorias de meus comandos, clique em seu nome para exibir todos os comandos de certa categoria!
 
  Categoria|Descrição|Total de comandos
 -|-|-
