@@ -1,4 +1,4 @@
-# ShinobuKocho 
+# Yuuki
 > ⠀⠀⠀⠀⠀⠀⠀⠀
 
 Hey... Eu sou apenas um bot para Discord, desenvolvido para ajudá-lo com o que você mais precisar!
@@ -8,16 +8,14 @@ Hey... Eu sou apenas um bot para Discord, desenvolvido para ajudá-lo com o que 
 
  Categoria|Descrição|Total de comandos
 -|-|-
-[Informação](https://github.com/DEIVINNI/ShinobuKocho/blob/master/src/lib/commands/commands.md#comandos-de-informações)|Comandos que demonstram informações de específicas coisas.|5
+[Informação](https://github.com/DEIVINNI/Yuuki/blob/master/src/lib/commands/commands.md#comandos-de-informações)|Comandos que demonstram informações de específicas coisas.|5
 
 # Autor
-**Shinobu Kocho** © [DEIVINNI](https://github.com/DEIVINNI).  
+**Yuuki** © [DEIVINNI](https://github.com/DEIVINNI).  
 Desenvolvido e mantido por **DEIVINNI**.
 
 # Links uteis
-> GitHub [Shinobu Kocho](https://github.com/DEIVINNI/ShinobuKocho).  
+> GitHub [Yuuki](https://github.com/DEIVINNI/Yuuki).  
 > Server [indisponível](https://www.discordapp.com/).  
 > Invite [indisponível](https://www.discordapp.com/).  
 > Site [em breve](https://www.google.com).  
-
-<img src="https://vignette.wikia.nocookie.net/kimetsu-no-yaiba/images/a/aa/Shinobu_introducing_herself.png/revision/latest?cb=20190817174155">
