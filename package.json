@@ -1,0 +1,22 @@
+{
+  "name": "yuuki",
+  "version": "0.0.3",
+  "description": "Hey... Eu sou apenas um bot para Discord, desenvolvido para ajudá-lo com o que você mais precisar!",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github/DEIVINNI/Yuuki"
+  },
+  "author": "DEIVINNI",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "dotenv": "^8.0.0",
+    "fs": "0.0.1-security",
+    "moment": "^2.24.0",
+    "moment-duration-format": "^2.3.2"
+  }
+}

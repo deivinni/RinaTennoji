@@ -1,4 +1,4 @@
-<h2 align="center">Yuuki</h2>⠀
+<h2 align="center">Yuuki</h2>
 
 Hey... Eu sou apenas um bot para Discord, desenvolvido para ajudá-lo com o que você mais precisar!
 
@@ -8,7 +8,11 @@ Hey... Eu sou apenas um bot para Discord, desenvolvido para ajudá-lo com o que 
 
 Categoria|Descrição|Total de comandos
 -|-|-
-[Informação](https://github.com/DEIVINNI/Yuuki/blob/master/src/lib/commands/commands.md#comandos-de-informações)|Comandos que demonstram informações de específicas coisas.|5
+[Informação](https://github.com/DEIVINNI/Yuuki/blob/master/src/lib/commands/commands.md#comandos-de-informações)|Comandos que demonstram informações de específicas coisas.|6
+[Owner](https://github.com/DEIVINNI/Yuuki/blob/master/src/lib/commands/commands.md#comandos-do-criador)|
+Comandos em que apenas meu criador pode usar.|1
+[Utilidades](https://github.com/DEIVINNI/Yuuki/blob/master/src/lib/commands/commands.md#comandos-de-utilidades)|
+Comandos em que lhe servir para algo.|1
 
 <h2 align="center">Autor</h2>
 

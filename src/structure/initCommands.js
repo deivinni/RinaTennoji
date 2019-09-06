@@ -3,7 +3,7 @@ const { readdirSync } = require('fs');
 module.exports = (bot) => {
   try {
     [
-      'informações'
+      'informações', 'owner', 'utilidades'
     ].forEach(path => {
       const commands = readdirSync(`./src/lib/commands/${path}/`).filter(x => x.endsWith('.js'));
       for (const file of commands) {

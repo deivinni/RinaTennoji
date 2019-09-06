@@ -1,34 +1,34 @@
 const { Embed } = require('../../../util/functions/index'),
   moment = require('moment'),
-  { emojis, owner } = require('../../../util/config'),
+  { Emojis, Owner } = require('../../../util/config'),
   { cpus, totalmem, hostname } = require('os'); require('moment-duration-format')
 
 module.exports = {
   exec: async (bot, msg, args) => {
     msg.channel.send(
       new Embed(msg.author).setThumbnail(bot.user.displayAvatarURL)
-      .addFieldArray(`${emojis._normals.info} | Informações minhas`, [[
-        `${emojis._normals.seta}Criador: ${bot.users.get(owner).tag}`,
-        `${emojis._normals.seta}Criada em: ${moment(bot.user.createdAt).format('LLL')}`,
-        `${emojis._normals.seta}Versão: \`${require('../../../../package.json').version}\``,
-        `${emojis._normals.seta}Latência: \`${Math.floor(bot.ping)}\` ms`,
-        `${emojis._normals.seta}Uptime: ${moment.duration(bot.uptime).format('`D` [d], `H` [h], `m` [min], `s` [segs]')}`,
-        `${emojis._normals.seta}Discord.js: \`${require('discord.js').version}\``,
-        `${emojis._normals.seta}Total de servidores: \`${bot.guilds.size}\``,
-        `${emojis._normals.seta}Total de usuários: \`${bot.users.size}\``,
-        `${emojis._normals.seta}Total de comandos: \`${bot.commands.size}\``
+      .addFieldArray(`${Emojis.Normais.Bot.Informações} | Informações minhas`, [[
+        `${Emojis.Normais.Bot.Seta}Criador: [${bot.users.get(Owner).tag}](${bot.users.get(Owner).displayAvatarURL})`,
+        `${Emojis.Normais.Bot.Seta}Criada em: ${moment(bot.user.createdAt).format('LLL')} (${moment().diff(moment(bot.user.createdAt), 'days')} dias)`,
+        `${Emojis.Normais.Bot.Seta}Versão: \`${require('../../../../package.json').version}\``,
+        `${Emojis.Normais.Bot.Seta}Latência: \`${Math.floor(bot.ping)}\` ms`,
+        `${Emojis.Normais.Bot.Seta}Uptime: ${moment.duration(bot.uptime).format('`D` [d], `H` [h], `m` [min], `s` [segs]')}`,
+        `${Emojis.Normais.Bot.Seta}Discord.js: \`${require('discord.js').version}\``,
+        `${Emojis.Normais.Bot.Seta}Total de servidores: \`${bot.guilds.size}\``,
+        `${Emojis.Normais.Bot.Seta}Total de usuários: \`${bot.users.size}\``,
+        `${Emojis.Normais.Bot.Seta}Total de comandos: \`${bot.commands.size}\``
       ]])
       .addFieldArray(`<:process_:601822798456815617> | Processamento`, [[
-        `${emojis._normals.seta}Hostname: ${hostname()}`,
-        `${emojis._normals.seta}CPU: \`${(process.cpuUsage().user/1024/1024/100).toFixed(2)}\`%`,
-        `${emojis._normals.seta}RAM: \`${(process.memoryUsage().heapUsed/1024/1024).toFixed(2)}\`MB/\`${(totalmem()/1024/1024/1024).toFixed(2)}\`GB`,
-        `${emojis._normals.seta}Processador: \`${cpus().length}\`x ${cpus()[0].model}`
+        `${Emojis.Normais.Bot.Seta}Hostname: ${hostname()}`,
+        `${Emojis.Normais.Bot.Seta}CPU: \`${(process.cpuUsage().user/1024/1024/100).toFixed(2)}\`%`,
+        `${Emojis.Normais.Bot.Seta}RAM: \`${(process.memoryUsage().heapUsed/1024/1024).toFixed(2)}\`MB/\`${(totalmem()/1024/1024/1024).toFixed(2)}\`GB`,
+        `${Emojis.Normais.Bot.Seta}Processador: ${cpus().length}x ${cpus()[0].model}`
       ]])
       .addFieldArray(`🔗 | Links úteis`, [[
-        `${emojis._normals.seta}Github: [clique aqui](https://github.com/DEIVINNI/ShinobuKocho)`,
-        `${emojis._normals.seta}Invite: [indisponível](https://www.discordapp.com/)`,
-        `${emojis._normals.seta}Servidor: [em breve](https://www.discordapp.com/)`,
-        `${emojis._normals.seta}Site: [em breve](https://www.google.com/)`
+        `${Emojis.Normais.Bot.Seta}Github: [clique aqui](https://github.com/DEIVINNI/Yuuki)`,
+        `${Emojis.Normais.Bot.Seta}Invite: [indisponível](https://www.discordapp.com/)`,
+        `${Emojis.Normais.Bot.Seta}Servidor: [em breve](https://www.discordapp.com/)`,
+        `${Emojis.Normais.Bot.Seta}Site: [em breve](https://www.google.com/)`
       ]])
     )
   },

@@ -1,10 +1,10 @@
 const { RichEmbed } = require('discord.js');
-const { colors } = require('../config');
+const { Colors } = require('../config');
 
 module.exports = class Embed extends RichEmbed{
   constructor(user, data = {}) {
     super(data)
-    this.setColor(colors.PADRÃO)
+    this.setColor(Colors.PADRÃO)
     if (user) this.setFooter(user.tag, user.displayAvatarURL).setTimestamp()
   }
   setDescriptionArray (messages) {
