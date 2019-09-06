@@ -9,7 +9,7 @@ Serverinfo|Veja as informações do servidor.|Sim
 Uptime|veja o tempo em que eu estou online.|Sim
 Userinfo|veja as informações de algum usuário.|Sim
 
-# Comandos do Criador
+# Comandos do criador
 
 Comando|Descrição|Habilitado
 -|-|-
