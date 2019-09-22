@@ -8,9 +8,12 @@ Hey... Eu sou apenas um bot para Discord, desenvolvido para ajudá-lo com o que 
 
 Categoria|Descrição|Total de comandos
 -|-|-
+[Ações](https://github.com/DEIVINNI/Yuuki/blob/master/src/lib/commands/commands.md#comandos-de-ações)|Comandos de ações, como exemplo "hug"|5
+[Diversões](https://github.com/DEIVINNI/Yuuki/blob/master/src/lib/commands/commands.md#comandos-de-diversões)|Comandos para se descontrair|2
+[Imagens](https://github.com/DEIVINNI/Yuuki/blob/master/src/lib/commands/commands.md#comandos-de-imagens)|Comandos para criar imagens ou pesquisar imagens|11
 [Informação](https://github.com/DEIVINNI/Yuuki/blob/master/src/lib/commands/commands.md#comandos-de-informações)|Comandos que demonstram informações de específicas coisas.|6
 [Owner](https://github.com/DEIVINNI/Yuuki/blob/master/src/lib/commands/commands.md#comandos-do-criador)|Comandos em que apenas meu criador pode usar.|1
-[Utilidades](https://github.com/DEIVINNI/Yuuki/blob/master/src/lib/commands/commands.md#comandos-de-utilidades)|Comandos em que lhe servir para algo.|1
+[Utilidades](https://github.com/DEIVINNI/Yuuki/blob/master/src/lib/commands/commands.md#comandos-de-utilidades)|Comandos em que lhe servir para algo.|2
 
 <h2 align="center">Autor</h2>
 
@@ -19,7 +22,7 @@ Desenvolvido e mantido por **DEIVINNI**.
 
 <h2 align="center">Links úteis</h2>
 
-> GitHub [Yuuki](https://github.com/DEIVINNI/Yuuki).             
-> Server [indisponível](https://www.discordapp.com/).                  
-> Invite [indisponível](https://www.discordapp.com/).                  
-> Site [em breve](https://www.google.com).                   
+> GitHub [Yuuki](https://github.com/DEIVINNI/Yuuki).
+> Server [indisponível](https://www.discordapp.com/).
+> Invite [indisponível](https://www.discordapp.com/).
+> Site [em breve](https://www.google.com).
