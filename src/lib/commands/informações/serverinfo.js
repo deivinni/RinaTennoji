@@ -31,7 +31,7 @@ module.exports = {
           `${Emojis.Normais.Bot.Seta}Emojis: ${guild.emojis.filter(r => !r.animated) ? `\`${guild.emojis.filter(r => !r.animated).size}\` normais` : ''}${guild.emojis.filter(r => !r.animated) ? ` e \`${guild.emojis.filter(r => r.animated).size}\` animados` : ''}`
         ]]
       ).addField(`Cargos[${guild.roles.size}]`, (guild.roles.map(r => r).join(', ') || 'Muitos cargos... ;-;'))
-    )
+    ).catch();
   },
   conf: { aliases: ['server-info'], enable: true, cooldown: 30 },
   help: {

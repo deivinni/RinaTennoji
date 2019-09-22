@@ -1,5 +1,5 @@
 module.exports = {
-  PADRÃO: 0xEDB545,
+  PADRÃO: 0x63B4FF,
   VERMELHO: 0xFF0000,
   AZUL: 0x0000FF,
   VERDE: 0x00FF00,

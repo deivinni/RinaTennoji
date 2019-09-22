@@ -30,10 +30,13 @@ module.exports = {
         `${Emojis.Normais.Bot.Seta}Servidor: [em breve](https://www.discordapp.com/)`,
         `${Emojis.Normais.Bot.Seta}Site: [em breve](https://www.google.com/)`
       ]])
-    )
+    ).catch();
   },
   conf: {
-    aliases: ['bi','bot-info'], enable: true, cooldown: 30
+    aliases: ['bi','bot-info'],
+    enable: true,
+    cooldown: 30,
+    permissions: ['SEND_MESSAGES']
   },
   help: {
     name: 'botinfo',

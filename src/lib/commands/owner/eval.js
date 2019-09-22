@@ -4,30 +4,37 @@ const { Embed } = require('../../../util/functions/index'),
 
 module.exports = {
   exec: async (bot, msg, args) => {
-    if (!args.join(' ')) return msg.channel.send('Sério? Vai querer que eu avalie algo para você ou não?')
+    if (!args.join(' ')) return msg.channel.send('Sério? Vai querer que eu avalie algo para você ou não?').catch();
     if (args.includes(('msg.guild.leave()' || 'bot.token'))) return msg.channel.send(new Embed().setColor(Colors.VERMELHO).setImage('https://i.imgur.com/k6QbXL7.png'));
     try {
       let evaluated = inspect(eval(args.join(' '), { depth: 0 })),
         timeStart = process.hrtime(),
         timeDiff = process.hrtime(timeStart),
         executed = `${timeDiff[0] > 0 ? `\`${timeDiff[0]}\`s` : ''}\`${timeDiff[1]/1000000}\`ms`;
-      msg.channel.send(evaluated, { code: 'js', maxLenght: 1500 });
+      msg.channel.send(evaluated, { code: 'js', maxLenght: 1500 }).catch();
       bot.channels.get('617063996004237317').send([
         `${Emojis.Normais.Discord.Cooldown}Executado em: ${executed}`,
         `${Emojis.Normais.Discord.Channel.Text}Tipo: ${typeof args.join(' ')}`,
         `${Emojis.Normais.Discord.Outage}Resultado:`, '```', `${evaluated}`, '```'
-      ].join('\n'));
+      ].join('\n'))
     } catch (e) {
-      msg.channel.send(e, { code:'js' });
-      bot.channels.get('617063996004237317').send(e.stack, { code: 'js', maxLenght: 1900 });
+      msg.channel.send(e, { code:'js' }).catch();
+      bot.channels.get('617063996004237317').send(e.stack, { code: 'js', maxLenght: 1900 })
     }
   },
-  conf: { aliases:['exec','debug'], cooldown: 15, ownerOnly: true, enable: true },
+  conf: {
+    aliases:['exec','debug'],
+    cooldown: 15,
+    ownerOnly: true,
+    enable: true,
+    permissions: ['SEND_MESSAGENS']
+  },
   help: {
     name: 'eval',
     description: 'faça-me avaliar se algum script (em `js`) está correto',
     usage: '<script>',
     member: 'owner',
-    category: 'owner'
+    category: 'owner',
+    credits: ['[[MenuDocs]](https://www.youtube.com/channel/UCpGGFqJP9vYvzFudqnQ-6IA)']
   }
 }

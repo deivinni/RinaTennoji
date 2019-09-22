@@ -14,12 +14,12 @@ Categoria|Descrição|Total de comandos
 
 <h2 align="center">Autor</h2>
 
-**Yuuki** © [DEIVINNI](https://github.com/DEIVINNI).  
+**Yuuki** © [DEIVINNI](https://github.com/DEIVINNI).
 Desenvolvido e mantido por **DEIVINNI**.
 
 <h2 align="center">Links úteis</h2>
 
-> GitHub [Yuuki](https://github.com/DEIVINNI/Yuuki).  
-> Server [indisponível](https://www.discordapp.com/).  
-> Invite [indisponível](https://www.discordapp.com/).  
-> Site [em breve](https://www.google.com).  
+> GitHub [Yuuki](https://github.com/DEIVINNI/Yuuki).
+> Server [indisponível](https://www.discordapp.com/).
+> Invite [indisponível](https://www.discordapp.com/).
+> Site [em breve](https://www.google.com).

@@ -3,16 +3,16 @@ const { Embed } = require('../../../util/functions/index'),
 
 module.exports = {
   exec: async (bot, msg, args) => {
-    const member = msg.mentions.users[0] || bot.users.get(args[0]) || msg.author,
+    const member = msg.mentions.users.first() || bot.users.get(args[0]) || msg.author,
       avatar = member.displayAvatarURL.endsWith('.gif') ? `${member.displayAvatarURL}?size=2048` : member.displayAvatarURL;
-    msg.channel.send(
-      new Embed(msg.author)
-      .setImage(avatar)
-      .setTitle(`${Emojis.Normais.Bot.Instagram} | Avatar de ${msg.guild.member(member).nickname || member.username}`)
-      .setDescription(`Clique __**[aqui](${avatar})**__ para fazer download`)
-    )
+    msg.channel.send(`${Emojis.Normais.Bot.Instagram} \`|\` Avatar de ${member.tag}`,new Embed(msg.author).setImage(avatar)).catch();
   },
-  conf: { aliases: ['picture', 'foto'], enable: true },
+  conf: {
+    aliases: ['picture', 'foto'],
+    enable: true,
+    cooldown: 10,
+    permissions: ['SEND_MESSAGES']
+  },
   help: {
     name: 'avatar',
     description: 'veja o avatar de algum usuário.',

@@ -25,7 +25,7 @@ module.exports = {
           `${Emojis.Normais.Bot.Seta}ADM: ${msg.guild.member(member).hasPermission('ADMINISTRATOR') ? Emojis.Normais.Discord.Enable.Enable : Emojis.Normais.Discord.Enable.Disable}`,
           `${Emojis.Normais.Bot.Seta}Cargos[${msg.guild.member(member).roles.size}]: ${msg.guild.member(member).roles.map(a => a).join(', ') || 'muitos cargos... ;-;'}`
         ]])
-      )
+      ).catch();
     } catch (e) {
       console.error(e);
       msg.channel.send(`${Emojis.Normais.Discord.Outage} \`|\` ${msg.author}, ocorreu um erro inesperado no comando, favor tente utiliza-lo novamente mais tarde!`)

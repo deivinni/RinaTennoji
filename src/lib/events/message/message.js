@@ -9,11 +9,11 @@ module.exports = (bot, msg) => {
           comando = args.shift().toLowerCase(),
           cmd = bot.commands.get(comando) || bot.commands.get(bot.aliases.get(comando));
         if (cmd) {
-          if (cmd.conf.ownerOnly && msg.author.id != Owner) return msg.channel.send(`${Emojis.Normais.Discord.Owner} \`|\` ${msg.author}, este comando só pode ser usado pelo meu criador!`);
-          if (cmd.conf.guildOnly && msg.channel.type == 'dm') return msg.channel.send(`${Emojis.Normais.Discord.Outage} \`|\` ${msg.author}, este comando só pode ser usado em um servidor!`);
-          if (cmd.conf.manu && msg.author.id != Owner) return msg.channel.send(`${Emojis.Normais.Bot.Manutenção} \`|\` ${msg.author}, este comando esta em manutenção.`);
-          if (!cmd.conf.enable && msg.author.id != Owner) return msg.channel.send(`${Emojis.Normais.Discord.Enable.Disable} \`|\` ${msg.author}, este comando está desabilitado.`);
-          if (cmd.conf.nsfw && (!msg.channel.nsfw || msg.channel.type != 'dm')) return msg.channel.send(`🔞 \`|\` ${msg.author}, este comando só pode ser usado em um canal \`NSFW\`!`);
+          if (cmd.conf.ownerOnly && msg.author.id != Owner) return msg.channel.send(`${Emojis.Normais.Discord.Owner} \`|\` ${msg.author}, este comando só pode ser usado pelo meu criador!`)
+          if (cmd.conf.guildOnly && msg.channel.type == 'dm') return msg.channel.send(`${Emojis.Normais.Discord.Outage} \`|\` ${msg.author}, este comando só pode ser usado em um servidor!`)
+          if (cmd.conf.manu && msg.author.id != Owner) return msg.channel.send(`${Emojis.Normais.Bot.Manutenção} \`|\` ${msg.author}, este comando esta em manutenção.`)
+          if (!cmd.conf.enable && msg.author.id != Owner) return msg.channel.send(`${Emojis.Normais.Discord.Enable.Disable} \`|\` ${msg.author}, este comando está desabilitado.`)
+          if (cmd.conf.nsfw && (!msg.channel.nsfw || msg.channel.type != 'dm')) return msg.channel.send(`🔞 \`|\` ${msg.author}, este comando só pode ser usado em um canal \`NSFW\`!`)
           if (!bot.cooldowns.get(cmd.help.name)) bot.cooldowns.set(cmd.help.name, new Collection())
           const now = Date.now(),
             timestamps = bot.cooldowns.get(cmd.help.name),
@@ -32,12 +32,12 @@ module.exports = (bot, msg) => {
             return console.log(e.stack);
           }
         } else if (!Prefixo.some(ctx => msg.content == ctx)) {
-            msg.channel.send(`${Emojis.Normais.Discord.Outage} \`|\` ${msg.author}, o comando \`${comando}\` não existe! Utilize \`${Prefixo[0]}help\` para ver todos os meus comandos.`)
-          }
+          msg.channel.send(`${Emojis.Normais.Discord.Outage} \`|\` ${msg.author}, o comando \`${comando}\` não existe! Utilize \`${Prefixo[0]}help\` para ver todos os meus comandos.`)
+        }
       } else return;
     })
     if (msg.content == msg.guild.me.toString()) {
-      return msg.channel.send(`${Emojis.Gifs.Bot.BotMention} \`|\` ${msg.author}, meu prefixo é \`${Prefixo[0]}\`, utilize \`${Prefixo[0]}help\` para saber meus comandos.`);
+      return msg.channel.send(`${Emojis.Gifs.Bot.BotMention} \`|\` ${msg.author}, meu prefixo é \`${Prefixo[0]}\`, utilize \`${Prefixo[0]}help\` para saber meus comandos.`)
     }
   }
 }
