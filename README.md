@@ -19,7 +19,7 @@ Desenvolvido e mantido por **DEIVINNI**.
 
 <h2 align="center">Links úteis</h2>
 
-> GitHub [Yuuki](https://github.com/DEIVINNI/Yuuki).
-> Server [indisponível](https://www.discordapp.com/).
-> Invite [indisponível](https://www.discordapp.com/).
-> Site [em breve](https://www.google.com).
+> GitHub [Yuuki](https://github.com/DEIVINNI/Yuuki).             
+> Server [indisponível](https://www.discordapp.com/).                  
+> Invite [indisponível](https://www.discordapp.com/).                  
+> Site [em breve](https://www.google.com).                   
