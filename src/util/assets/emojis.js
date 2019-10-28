@@ -22,7 +22,8 @@ module.exports = {
       wikipedia: '<:Wikipedia:636277532026732557>',
       fechar: '<:Fechar:636986130428067840>',
       steam: '<:Steam:637639976648966164>',
-      overwatch: '<:Overwatch:637750326342189076>'
+      overwatch: '<:Overwatch:637750326342189076>',
+      apex: '<:ApexLegends:638209305564151809>'
     },
     discord: {
       join_arrow: '<:JoinArrow:612324956549677076>',
@@ -114,7 +115,8 @@ module.exports = {
         wikipedia: '636277532026732557',
         fechar: '636986130428067840',
         steam: '637639976648966164',
-        overwatch: '637750326342189076'
+        overwatch: '637750326342189076',
+        apex: '638209305564151809'
       },
       discord: {
         join_arrow: '612324956549677076',

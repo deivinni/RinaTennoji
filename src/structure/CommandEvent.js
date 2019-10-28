@@ -41,7 +41,7 @@ module.exports = async (bot, msg, cmd, comando) => {
       }
     }
     
-    if (!bot.cooldowns.get(cmd.help.name)) bot.cooldowns.set(cmd.help.name, new Collection())
+    if (!bot.cooldowns.get(cmd.help.name)) bot.cooldowns.set(cmd.help.name, new Collection)
     const now = Date.now(),
       timestamps = bot.cooldowns.get(cmd.help.name),
       cooldown_amount = ((cmd.cooldown || cooldown || 3) * 1000);

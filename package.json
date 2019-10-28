@@ -1,6 +1,6 @@
 {
   "name": "rina_tennoji",
-  "version": "1.0.0",
+  "version": "0.0.a6",
   "description": "Hey... Eu sou apenas um bot para Discord desenvolvido para ajudá-lo com o que você mais precisar!",
   "main": "server.js",
   "scripts": {
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/DEIVINNI/RinaTennoji#readme",
   "dependencies": {
     "@vitalets/google-translate-api": "^3.0.0",
+    "apextab-api": "^1.0.5",
     "ascii-art": "^1.5.1",
     "cheerio": "^1.0.0-rc.3",
     "color-convert": "^2.0.1",
