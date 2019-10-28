@@ -10,7 +10,7 @@ Categoria|Descrição|Total de comandos
 -|-|-
 Ações|Comandos de ações, como exemplo "hug"|5
 Diversões|Comandos para se descontrair|2
-Game|Comandos para peaquisar ou ver informações de alguns games|2
+Game|Comandos para pesquisar ou ver informações de alguns games|2
 Imagens|Comandos para criar imagens ou pesquisar imagens|13
 Informação|Comandos que demonstram informações de específicas coisas|6
 NSFW|Comandos para lhe ajudar quando estiver sozinho ( ͡° ͜ʖ ͡°)|21
