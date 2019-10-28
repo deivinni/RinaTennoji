@@ -1,8 +1,10 @@
 module.exports = {
-  Token: process.env.TOKEN,
-  Prefixo: ['y!', 'yuuki '],
-  Invite: '',
-  Owner: '515903666360942594',
-  Colors: require('./assets/colors'),
-  Emojis: require('./assets/emojis')
+  token: process.env.TOKEN,
+  owner: process.env.OWNER,
+  server: process.env.SERVER,
+  invite: process.env.INVITE,
+  prefixo: ['r#','rina '],
+  emojis: require('./assets/emojis.js'),
+  colors: require('./assets/colors.js'),
+  permis: require('./assets/permissions.js')
 }

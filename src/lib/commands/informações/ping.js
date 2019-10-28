@@ -1,13 +1,19 @@
-const { Emojis } = require('../../../util/config');
-
 module.exports = {
-  exec: async (bot, msg, args) => {
-    msg.channel.send(`${Emojis.Gifs.Discord.Latency} \`|\` ${msg.author}, minha latência é \`${Math.floor(bot.ping)}\` ms!`).catch();
+  exec: async (msg) => {
+    msg.channel.startTyping(true);
+    return await msg.channel.send(`${msg.emoji.gifs.discord.latency} \`|\` ${msg.author}, minha lantência é \`${Math.floor(msg.bot.ping)}\` ms!`).then(msg.channel.stopTyping(true));
   },
-  conf: { aliases: ['latency'], enable: true },
+  conf: {
+    alias: ['latency'],
+    cooldown: 5,
+    enable: true,
+    permissions: {
+      bot: ['SEND_MESSAGES','USE_EXTERNAL_EMOJIS']
+    }
+  },
   help: {
     name: 'ping',
-    description: 'veja a minha latência',
+    desc: 'veja a minha latência',
     member: 'usuários',
     category: 'informações'
   }

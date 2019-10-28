@@ -1,4 +1,7 @@
 module.exports = {
-  Embed: require('./Embed.js'),
-  FirstUpperCase: require('./FirstUpperCase')
+  Embed: require('./Embed'),
+  FirstUpperCase: require('./FirstUpperCase'),
+  shortenerText: require('./shortenerText'),
+  FormatNumber: require('./FormatNumber'),
+  FormatDuration: require('./FormatDuration')
 }

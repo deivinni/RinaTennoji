@@ -1,9 +1,9 @@
-const { Prefixo } = require('../../../util/config');
+const { prefixo } = require('../../../util/config');
 
-module.exports = (bot, _, newMsg) => {
-  Prefixo.find(prefix => {
-    if (newMsg.content.toLowerCase().startsWith(prefix)) {
-      return bot.emit('message', newMsg);
+module.exports = (bot, old, _new) => {
+  prefixo.find(prefix => {
+    if (_new.content.toLowerCase().startsWith(prefix)) {
+      bot.emit('message', _new);
     } else return;
   })
 }

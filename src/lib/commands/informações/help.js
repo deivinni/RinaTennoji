@@ -1,67 +1,101 @@
-const { Embed, FirstUpperCase } = require('../../../util/functions/index'),
-  { Emojis, Prefixo, Owner } = require('../../../util/config');
+const { Embed, FirstUpperCase } = require('../../../util/functions/index'), 
+  moment = require('moment'); require('moment-duration-format'); moment.locale('pt-BR');
 
 module.exports = {
-  exec: async (bot, msg, args) => {
-    const embed = new Embed(msg.author)
-      .setThumbnail(bot.user.displayAvatarURL)
-      .setAuthor(`Comandos da ${bot.user.username}`,'https://cdn.discordapp.com/emojis/586617374141186097.png?v=1');
-    if (!args[0]) {
-      embed.setDescriptionArray([[
-        `${Emojis.Normais.Discord.Owner} \`|\` Criador: ${bot.users.get(Owner).tag}`,
-        `${Emojis.Normais.Discord.Channel.Text} \`|\` Prefixo: \`${Prefixo[0]}\` ou \`yuuki⠀\``,
-        `${Emojis.Normais.Discord.Certified} \`|\` Total de comandos: \`${bot.commands.size}\``
-      ]])
-      const dir = (category) => bot.commands.filter(c => c.help.category === category)
-      embed.addField(`${Emojis.Normais.Bot.Seta}Ações [${dir('ações').size}]:`            , (dir('ações')      .map(c=>`\`${c.help.name}\``).join(', ') || 'Comandos indisponíveis'));
-      embed.addField(`${Emojis.Normais.Bot.Seta}Diversão [${dir('diversão').size}]:`      , (dir('diversão')   .map(c=>`\`${c.help.name}\``).join(', ') || 'Comandos indisponíveis'));
-      embed.addField(`${Emojis.Normais.Bot.Seta}Imagem [${dir('imagem').size}]:`          , (dir('imagem')     .map(c=>`\`${c.help.name}\``).join(', ') || 'Comandos indisponíveis'));
-      embed.addField(`${Emojis.Normais.Bot.Seta}Informações [${dir('informações').size}]:`, (dir('informações').map(c=>`\`${c.help.name}\``).join(', ') || 'Comandos indisponíveis'));
-      embed.addField(`${Emojis.Normais.Bot.Seta}Owner [${dir('owner').size}]:`            , (dir('owner')      .map(c=>`\`${c.help.name}\``).join(', ') || 'Comandos indisponíveis'));
-      embed.addField(`${Emojis.Normais.Bot.Seta}Utilidades [${dir('utilidades').size}]:`  , (dir('utilidades') .map(c=>`\`${c.help.name}\``).join(', ') || 'Comandos indisponíveis'));
-      msg.channel.send(embed).catch();
-    } else {
-      let cmd = bot.commands.get(args[0].toLowerCase()) || bot.commands.get(bot.aliases.get(args[0].toLowerCase()));
-      if (!cmd) {
-        msg.channel.send(`${Emojis.Normais.Discord.Outage} \`|\` ${msg.author}, comando \`${args[0]}\` não foi encontrado! Verifique se este comando realmente existe.`)
-      }
-      let conf = cmd.conf, help = cmd.help;
-      if (conf.hide_help) return;
-      if (conf.nsfw && (!msg.channel.nsfw || msg.channel.type != 'dm')) {
-        return msg.channel.send(`${Emojis.Normais.Discord.Outage} \`|\` ${msg.author}, não posso mostrar meus comandos \`NSFW\` neste canal!`)
-      }
-      return msg.channel.send(
-        embed.setDescription(`\`<>\`: obrigatório / \`[]\`: opcional`)
-        .addFieldArray(`${Emojis.Normais.Bot.Informações} | Informações`, [[
-          `${Emojis.Normais.Bot.Seta}Nome: ${FirstUpperCase(help.name)}`,
-          `${Emojis.Normais.Bot.Seta}Aliases: ${conf.aliases.map(a => `\`${a}\``).join(', ') || 'sem aliases... ;-;'}`,
-          `${Emojis.Normais.Bot.Seta}Descrição: ${FirstUpperCase(help.description)}`,
-          `${Emojis.Normais.Bot.Seta}Categoria: ${help.category === 'nsfw' ? 'NSFW': FirstUpperCase(help.category)}`,
-          `${Emojis.Normais.Bot.Seta}Créditos: ${conf.credits.map(a => a).join(', ') || `sem créditos... ${Emojis.Normais.Bot.PepoHappy}`}`
-        ]]).addFieldArray(`${Emojis.Normais.Bot.Editar} | Utilização`, [[
-          `${Emojis.Normais.Bot.Seta}Forma de uso: \`${prefix+(help.usage ? `${help.name} ${help.usage}` : help.name)}\``,
-          `${Emojis.Normais.Bot.Seta}Acessível por: ${FirstUpperCase(help.member)}`
-        ]]).addFieldArray(`${Emojis.Normais.Discord.UserSettings} | Configurações`, [[
-          `${Emojis.Normais.Bot.Seta}DM: ${conf.guildOnly ? Emojis.Normais.Discord.Enable.Disable : Emojis.Normais.Discord.Enable.Enable}`,
-          `${Emojis.Normais.Bot.Seta}Manutenção: ${conf.manu ? Emojis.Normais.Discord.Enable.Enable : Emojis.Normais.Discord.Enable.Disable}`,
-          `${Emojis.Normais.Bot.Seta}Habilitado: ${conf.enable ? Emojis.Normais.Discord.Enable.Enable : Emojis.Normais.Discord.Enable.Disable}`,
-          `${Emojis.Normais.Bot.Seta}NSFW: ${conf.nsfw ? Emojis.Normais.Discord.Enable.Enable : Emojis.Normais.Discord.Enable.Disable}`
+  exec: async (msg) => {
+    msg.channel.startTyping(true);
+    const embed = new Embed(msg.author, false, {
+        thumbnail: {
+          url: msg.bot.user.displayAvatarURL
+        }
+      }), Command = (cat) => msg.bot.commands.filter(c => c.help.category == cat);
+
+    if (!msg.args[0]) {
+      return await msg.channel.send(`<:pasta_:587005722160791572> \`|\` Comandos da ${msg.bot.user.username}`, {
+        embed: embed.setDescriptionArray([[
+          `${msg.emoji.normais.discord.owner} \`|\` Meu criador: ${msg.bot.users.get(msg.config.owner).tag}`,
+          `${msg.emoji.normais.discord.channel.text} \`|\` Prefixos: \`${msg.config.prefixo[0]}\` ou \`${msg.config.prefixo[1]}\``,
+          `${msg.emoji.normais.discord.certified} \`|\` Total de comandos: \`${msg.bot.commands.filter(c => c.help.category != 'owner').size}\``,
         ]])
-      ).catch();
+        .addField(`${msg.emoji.normais.bot.coffee} Ações [${Command('ações').size}]:`, (Command('ações').map(c => `\`${c.help.name}\``).join(', ') || `${msg.emoji.normais.discord.outage} \`|\` Erro ao pegar os comandos... ${msg.emoji.normais.bot.cry}`))
+        .addField(`${msg.emoji.normais.bot.pepo_happy} Diversão [${Command('diversão').size}]:`, (Command('diversão').map(c => `\`${c.help.name}\``).join(', ') || `${msg.emoji.normais.discord.outage} \`|\` Erro ao pegar os comandos... ${msg.emoji.normais.bot.cry}`))
+        .addField(`<:game_:598130455602003969> Game [${Command('game').size}]:`, (Command('game').map(c => `\`${c.help.name}\``) || `${msg.emoji.normais.discord.outage} \`|\` Erro ao pegar os comandos... ${msg.emoji.normais.bot.cry}`))
+        .addField(`${msg.emoji.normais.bot.instagram} Imagem [${Command('imagem').size}]:`, (Command('imagem').map(c => `\`${c.help.name}\``).join(', ') || `${msg.emoji.normais.discord.outage} \`|\` Erro ao pegar os comandos... ${msg.emoji.normais.bot.cry}`))
+        .addField(`${msg.emoji.normais.bot.informações} Informações [${Command('informações').size}]:`, (Command('informações').map(c => `\`${c.help.name}\``).join(', ') || `${msg.emoji.normais.discord.outage} \`|\` Erro ao pegar os comandos... ${msg.emoji.normais.bot.cry}`))
+        .addField(`🔞 NSFW [${Command('nsfw').size}]:`, ((msg.channel.nsfw ? Command('nsfw').map(c => `\`${c.help.name}\``).join(', ') : `${msg.emoji.normais.discord.outage} \`|\` Só posso mostrar esses comandos em um canal \`NSFW\``) || `${msg.emoji.normais.discord.outage} \`|\` Erro ao pegar os comandos... ${msg.emoji.normais.bot.cry}`))
+        .addField(`${msg.emoji.normais.bot.search} Search [${Command('search').size}]:`, (Command('search').map(c => `\`${c.help.name}\``).join(', ') || `${msg.emoji.normais.discord.outage} \`|\` Erro ao pegar os comandos... ${msg.emoji.normais.bot.cry}`))
+        .addField(`${msg.emoji.normais.bot.editar} Utilidades [${Command('utilidade').size}]:`, (Command('utilidade').map(c => `\`${c.help.name}\``).join(', ') || `${msg.emoji.normais.discord.outage} \`|\` Erro ao pegar os comandos... ${msg.emoji.normais.bot.cry}`))
+        //.addField(`${msg.emoji.normais.bot.think} Random [${Command('random').size}]:`, (Command('random').map(c => `\`${c.help.name}\``).join(', ') || `${msg.emoji.normais.discord.outage} \`|\` Erro ao pegar os comandos... ${msg.emoji.normais.bot.cry}`))
+      }).then(msg.channel.stopTyping(true));
+    } else if (msg.args[0]) {
+      if (msg.bot.commands.has(msg.args[0])) {
+        const cmd = msg.bot.commands.get((msg.args[0] || msg.bot.aliases.get(msg.args[0]))), conf = cmd.conf, help = cmd.help;
+        return await msg.channel.send(`<:pasta_:587005722160791572> \`|\` Comandos da ${msg.bot.user.username}`, {
+          embed: embed.setTitle(`<:cmd_:586617374141186097> \`|\` Comando: \`${FirstUpperCase(help.name)}\``)
+          .setDescriptionArray([[
+            `${msg.emoji.normais.bot.seta}Nome: ${help.name || `sem nome... ${msg.bot.normais.bot.think}`}`,
+            `${msg.emoji.normais.bot.seta}Aliases: ${conf.alias.map(a => `\`${a}\``).join(', ') || `sem aliases... ${msg.emoji.normais.bot.cry}`}`,
+            `${msg.emoji.normais.bot.seta}Descrição: ${help.desc || `sem descrição... ${msg.emoji.normais.bot.cry}`}`,
+            `${msg.emoji.normais.bot.seta}Cooldown: ${conf.cooldown || 3} segundos`,
+            `${msg.emoji.normais.bot.seta}Categoria: ${help.category === 'nsfw' ? 'NSFW': help.category === 'random' ? `sem categoria... ${msg.emoji.normais.bot.cry}` : help.category}`,
+            `${msg.emoji.normais.bot.seta}Créditos: ${help.credit ? help.credit.map(a => a).join(', ') : `sem créditos... ${msg.emoji.normais.bot.pepo_happy}`}`
+          ]]).setFooter(`Reaja abaixo para mais informações`).setTimestamp()
+        }).then(message => {
+          message.channel.stopTyping(true);
+          message.react(msg.emoji.ids.normais.bot.adicionar).then(async() => {
+            const collector = message.createReactionCollector((r, u) => r.emoji.id === msg.emoji.ids.normais.bot.adicionar && u.id === msg.author.id);
+            collector.on('collect', async (r) => {
+              switch (r.emoji.id) {
+                case msg.emoji.ids.normais.bot.adicionar :
+                  message.clearReactions();
+                  await message.edit(`<:pasta_:587005722160791572> \`|\` Comandos da ${msg.bot.user.username}`, {
+                    embed: embed.setDescriptionArray([
+                      [
+                        `\`<>\`: obrigatório / \`[]\`: opcional`
+                      ],[
+                        `${msg.emoji.normais.bot.seta}Nome: ${help.name || `sem nome... ${msg.bot.normais.bot.think}`}`,
+                        `${msg.emoji.normais.bot.seta}Aliases: ${conf.alias.map(a => `\`${a}\``).join(', ') || `sem aliases... ${msg.emoji.normais.bot.cry}`}`,
+                        `${msg.emoji.normais.bot.seta}Descrição: ${help.desc || `sem descrição... ${msg.emoji.normais.bot.cry}`}`,
+                        `${msg.emoji.normais.bot.seta}Cooldown: ${conf.cooldown || 3} segundos`,
+                        `${msg.emoji.normais.bot.seta}Categoria: ${help.category === 'nsfw' ? 'NSFW': help.category === 'random' ? `sem categoria... ${msg.emoji.normais.bot.cry}` : help.category}`,
+                        `${msg.emoji.normais.bot.seta}Créditos: ${help.credit ? help.credit.map(a => a).join(', ') : `sem créditos... ${msg.emoji.normais.bot.pepo_happy}`}`
+                      ],[
+                        `${msg.emoji.normais.bot.seta}Forma de uso: \`${msg.config.prefixo[0] + (help.usage ? `${help.name} ${help.usage}` : help.name)}\``,
+                        `${msg.emoji.normais.bot.seta}Acessível por: ${help.member}`
+                      ],[
+                        `${msg.emoji.normais.bot.seta}DM: ${conf.guildOnly      ? msg.emoji.normais.discord.enable.disable : msg.emoji.normais.discord.enable.enable}`,
+                        `${msg.emoji.normais.bot.seta}Manutenção: ${conf.manu   ? msg.emoji.normais.discord.enable.enable  : msg.emoji.normais.discord.enable.disable}`,
+                        `${msg.emoji.normais.bot.seta}Habilitado: ${conf.enable ? msg.emoji.normais.discord.enable.enable  : msg.emoji.normais.discord.enable.disable}`,
+                        `${msg.emoji.normais.bot.seta}NSFW: ${conf.nsfw         ? msg.emoji.normais.discord.enable.enable  : msg.emoji.normais.discord.enable.disable}`,
+                        `${msg.emoji.normais.bot.seta}Permissões: \n${[
+                          `<:invisivel_:586618921008889904>Usuário: ${conf.permissions.member ? conf.permissions.member.map(perm => `\`${msg.config.permis[perm].name}\``).join(', ') : `sem permissões... ${msg.emoji.normais.bot.think}`}`,
+                          `<:invisivel_:586618921008889904>Minhas: ${conf.permissions.bot ? conf.permissions.bot.map(perm => `\`${msg.config.permis[perm].name}\``).join(', ') : `sem permissões... ${msg.emoji.normais.bot.think}`}`
+                        ].join('\n')}`
+                      ]
+                    ]).setFooter(msg.author.tag, msg.author.displayAvatarURL).setTimestamp()
+                  }).then(() => msg.channel.stopTyping(true));
+                break;
+              }
+            })
+          })
+        })
+      } else return await msg.channel.send(`${msg.bot.normais.discord.outage} \`|\` ${msg.author}, este comando \`${msg.args[0]}\` não existe, favor verifique se digitou corretamente!`).then(() => msg.channel.stopTyping(true));
     }
   },
   conf: {
-    aliases: ['ajuda','comandos','comando','cmds','cmd'],
     enable: true,
-    cooldown: 15,
-    permissions: ['SEND_MESSAGES']
+    alias: ['ajuda','cmds','comandos','comando'],
+    cooldown: 10,
+    permissions: {
+      bot: ['SEND_MESSAGES','USE_EXTERNAL_EMOJIS','ADD_REACTIONS','MANAGE_MESSAGES']
+    }
   },
   help: {
     name: 'help',
-    description: 'veja todos os meus comandos',
+    desc: 'veja todos os meus comandos',
     usage: '[comando]',
     member: 'usuários',
     category: 'informações',
-    credits: ['[[MenuDocs]](https://www.youtube.com/channel/UCpGGFqJP9vYvzFudqnQ-6IA)']
+    credit: ['[[MenuDocs]](https://www.youtube.com/channel/UCpGGFqJP9vYvzFudqnQ-6IA)']
   }
 }

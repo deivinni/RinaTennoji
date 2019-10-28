@@ -1,40 +1,45 @@
-const { Embed } = require('../../../util/functions/index'),
-  { Emojis } = require('../../../util/config'),
-  moment = require('moment'); moment.locale('pt-BR');
+const { Embed } = require('../../../util/functions/index'), moment = require('moment'); moment.locale('pt-BR');
 
 module.exports = {
-  exec: async (bot, msg, args) => {
+  exec: async (msg) => {
+    msg.channel.startTyping(true);
     try {
-      const member = msg.mentions.users[0] || bot.users.get(args[0]) || msg.author,
-        status = member.presence.status == 'idle' ? Emojis.Normais.Discord.Status.Idle : member.presence.status == 'online' ? Emojis.Normais.Discord.Status.Online : member.presence.status == 'dnd' ? Emojis.Normais.Discord.Status.Dnd : usuario.presence.status == 'offline' ? Emojis.Normais.Discord.Status.Offline : usuario.presence.status == 'steam' ? Emojis.Normais.Discord.Status.Streaming : null;
-        //usageDiscordIn = member.presence.clientStatus == 'web' ? 'navegador' : member.presence.clientStatus == 'desktop' ? 'computador' : member.presence.clientStatus == 'mobile' ? 'celular' : `não esta online no momento`;
-      msg.channel.send(
-        new Embed(msg.author)
-        .setAuthor(`Informações de ${msg.guild.member(member).nickname || member.username}`, bot.user.displayAvatarURL)
+      const member = msg.mentions.users.first() || msg.bot.users.get(msg.args[0]) || msg.author,
+        status = member.presence.status == 'idle' ? msg.emoji.normais.discord.status.idle : member.presence.status == 'online' ? msg.emoji.normais.discord.status.online : member.presence.status == 'dnd' ? msg.emoji.normais.discord.status.dnd : usuario.presence.status == 'offline' ? msg.emoji.normais.discord.status.offline : usuario.presence.status == 'steam' ? msg.emoji.normais.discord.status.streaming : msg.emoji.normais.bot.think;
+      return await msg.channel.send(`${msg.emoji.normais.bot.membros} \`|\` Informações de ${msg.guild.member(member).nickname || member.username}`, {
+        embed: new Embed(msg.author, false)
         .setThumbnail(member.displayAvatarURL)
-        .addFieldArray('Informações principais', [[
-          `${Emojis.Normais.Bot.Seta}Nome: ${member.username} (ID: \`${member.id}\`)`,
-          `${Emojis.Normais.Bot.Seta}Avatar: __**[clique aqui](${member.displayAvatarURL.endsWith('.gif') ? `${member.displayAvatarURL}?size=2048` : member.displayAvatarURL})**__`,
-          `${Emojis.Normais.Bot.Seta}Status: ${status}`,
-          `${Emojis.Normais.Bot.Seta}Jogando: ${member.presence.game ? member.presence.game.name : 'nada... ;-;'}`,
-          `${Emojis.Normais.Bot.Seta}Conta criada: ${moment(member.createdAt).format('LLL')} (${moment().diff(moment(member.createdAt), 'days')} dias)`
-        ]])
-        .addFieldArray('Informações no servidor', [[
-          `${Emojis.Normais.Bot.Seta}Apelido: ${msg.guild.member(member).nickname || 'sem apelido... ;-;'}`,
-          `${Emojis.Normais.Bot.Seta}Entrou: ${moment(msg.guild.member(member).joinedAt).format('LLL')} (${moment().diff(moment(msg.guild.member(member).joinedAt), 'days')} dias)`,
-          `${Emojis.Normais.Bot.Seta}ADM: ${msg.guild.member(member).hasPermission('ADMINISTRATOR') ? Emojis.Normais.Discord.Enable.Enable : Emojis.Normais.Discord.Enable.Disable}`,
-          `${Emojis.Normais.Bot.Seta}Cargos[${msg.guild.member(member).roles.size}]: ${msg.guild.member(member).roles.map(a => a).join(', ') || 'muitos cargos... ;-;'}`
-        ]])
-      ).catch();
+        .setDescriptionArray([
+          [
+            `${msg.emoji.normais.bot.seta}Nome: ${member.username} (ID: \`${member.id}\`)`,
+            `${msg.emoji.normais.bot.seta}Avatar: __**[clique aqui](${member.displayAvatarURL.endsWith('.gif') ? `${member.displayAvatarURL}?size=2048` : member.displayAvatarURL})**__`,
+            `${msg.emoji.normais.bot.seta}Status: ${status}`,
+            `${msg.emoji.normais.bot.seta}Jogando: ${member.presence.game ? member.presence.game.name : `nada... ${msg.emoji.normais.bot.cry}`}`,
+            `${msg.emoji.normais.bot.seta}Conta criada: ${moment(member.createdAt).format('LLL')} (${moment().diff(moment(member.createdAt), 'days')} dias)`
+          ],[
+            `${msg.emoji.normais.bot.seta}Apelido: ${msg.guild.member(member).nickname || `sem apelido... ${msg.emoji.normais.bot.cry}`}`,
+            `${msg.emoji.normais.bot.seta}Entrou: ${moment(msg.guild.member(member).joinedAt).format('LLL')} (${moment().diff(moment(msg.guild.member(member).joinedAt), 'days')} dias)`,
+            `${msg.emoji.normais.bot.seta}ADM: ${msg.guild.member(member).hasPermission('ADMINISTRATOR') ? msg.emoji.normais.discord.enable.enable : msg.emoji.normais.discord.enable.disable}`,
+            `${msg.emoji.normais.bot.seta}Cargos[${msg.guild.member(member).roles.size}]: ${msg.guild.member(member).roles.map(a => a).join(', ') || `muitos cargos... ${msg.emoji.normais.bot.cry}`}`
+          ]
+        ])
+      }).then(msg.channel.stopTyping(true));
     } catch (e) {
       console.error(e);
-      msg.channel.send(`${Emojis.Normais.Discord.Outage} \`|\` ${msg.author}, ocorreu um erro inesperado no comando, favor tente utiliza-lo novamente mais tarde!`)
+      return await msg.channel.send(`${msg.emoji.normais.discord.outage} \`|\` ${msg.author}, ocorreu um erro inesperado no comando, favor tente utiliza-lo novamente mais tarde!`).then(msg.channel.stopTyping(true));
     }
   },
-  conf: { aliases:['server-info'], enable: true },
+  conf: { 
+    alias:['info-user','ui'], 
+    enable: true,
+    permissions: {
+      bot: ['SEND_MESSAGES','USE_EXTERNAL_EMOJIS']
+    },
+    cooldown: 20
+  },
   help: {
     name: 'userinfo',
-    description: 'veja as informações de algum usuário.',
+    desc: 'veja as informações de algum usuário',
     usage: '[@usuário]',
     member: 'usuários',
     category: 'informações'

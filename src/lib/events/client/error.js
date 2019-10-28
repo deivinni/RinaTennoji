@@ -1,9 +1,7 @@
-const { Emojis } = require('../../../util/config')
-
-module.exports = (bot, error) => {
-  bot.channels.get('609848544060506113').send([
-    `${Emojis.Normais.Discord.Channel.Text} \`|\` Comando: ${comando}`,
-    `${Emojis.Normais.Discord.BugHunter} \`|\` Usuário: ${msg.author.tag}`,
-    `${Emojis.Normais.Discord.Outage} \`|\` Erro:`,'```js',`${error.stack}`,'```'
+module.exports = async (bot, error) => {
+  return await bot.guilds.get('586610890288136202').channels.get('609848544060506113').send([
+    '```js',
+    `${error.stack}`,
+    '```'
   ].join('\n'));
 }

@@ -1,22 +1,45 @@
 {
-  "name": "yuuki",
-  "version": "0.0.3",
-  "description": "Hey... Eu sou apenas um bot para Discord, desenvolvido para ajudá-lo com o que você mais precisar!",
+  "name": "rina_tennoji",
+  "version": "1.0.0",
+  "description": "Hey... Eu sou apenas um bot para Discord desenvolvido para ajudá-lo com o que você mais precisar!",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
   },
   "repository": {
     "type": "git",
-    "url": "https://github/DEIVINNI/Yuuki"
+    "url": "git+https://github.com/DEIVINNI/RinaTennoji.git"
   },
   "author": "DEIVINNI",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DEIVINNI/RinaTennoji/issues"
+  },
+  "homepage": "https://github.com/DEIVINNI/RinaTennoji#readme",
   "dependencies": {
+    "@vitalets/google-translate-api": "^3.0.0",
+    "ascii-art": "^1.5.1",
+    "cheerio": "^1.0.0-rc.3",
+    "color-convert": "^2.0.1",
+    "dateformat": "^3.0.3",
     "discord.js": "^11.5.1",
-    "dotenv": "^8.0.0",
+    "dotenv": "^8.1.0",
     "fs": "0.0.1-security",
+    "intl": "^1.2.5",
+    "jikanjs": "^0.7.0",
+    "mathjs": "^6.2.3",
     "moment": "^2.24.0",
-    "moment-duration-format": "^2.3.2"
+    "moment-duration-format": "^2.3.2",
+    "nekos.life": "^2.0.4",
+    "node-fetch": "^2.6.0",
+    "os": "^0.1.1",
+    "overwatch-api": "^0.8.0",
+    "querystring": "^0.2.0",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7",
+    "simple-youtube-api": "^5.2.1",
+    "snekfetch": "^4.0.4",
+    "weather-js": "^2.0.0"
   }
 }

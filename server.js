@@ -1,2 +1,2 @@
 require('dotenv').config();
-module.exports = require('./src/main');
+module.exports = require('./src/main.js');

@@ -1,21 +1,29 @@
 const { Embed } = require('../../../util/functions/index'),
-  { Emojis } = require('../../../util/config'),
   { get } = require('snekfetch')
 
 module.exports = {
-  exec: async(bot, msg, args) => {
-    if (!args.join(' ')) return msg.channel.send(`${Emojis.Normais.Discord.Outage} \`|\` ${msg.author}, você deve colocar alguma mensagem para o Donald Trump tweetar.`).catch();
+  exec: async(msg) => {
     msg.channel.startTyping(true);
-    get(`https://nekobot.xyz/api/imagegen?type=trumptweet&text=${args.join(' ')}`).then(async (r) => {
+    if (!msg.args.join(' ')) return await msg.channel.send(`${msg.emoji.normais.discord.outage} \`|\` ${msg.author}, você deve colocar alguma mensagem para o Donald Trump tuítar.`).then(msg.channel.stopTyping(true));
+    return await get(`https://nekobot.xyz/api/imagegen?type=trumptweet&text=${msg.args.join(' ')}`).then(async (r) => {
       msg.delete();
-      await msg.channel.send(new Embed(msg.author).setImage(r.body.message)).catch();
-    })
-    msg.channel.stopTyping(true);
+      return await msg.channel.send({
+        embed: new Embed(msg.author, 'NekoBot').setImage(r.body.message)
+      }).then(msg.channel.stopTyping(true));
+    });
   },
-  conf:{ aliases: ['trumptweet'], enable: true, cooldown: 20 },
+  conf:{ 
+    alias: ['trumptweet'], 
+    enable: true, 
+    cooldown: 15,
+    permissions: {
+      member: ['ATTACH_FILES'],
+      bot: ['SEND_MESSAGES','ATTACH_FILES','USE_EXTERNAL_EMOJIS']
+    }
+  },
   help: {
     name: 'trump',
-    description: 'faça o Donald Trump twittar algo.',
+    desc: 'faça o Donald Trump tuítar algo',
     usage: '<mensagem>',
     member: 'usuários',
     category: 'imagem',

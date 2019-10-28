@@ -1,35 +1,52 @@
-const { Embed } = require('../../../util/functions/index'),
-  { Emojis } = require('../../../util/config'),
-  { meow } = new (require('nekos.life'))().sfw;
+const { meow } = new (require('nekos.life'))().sfw,
+  { Embed } = require('../../../util/functions/index');
 
 module.exports = {
-  exec: async(bot, msg, args) => {
-    const embed = new Embed(msg.author)
-    meow().then(img => {
-      msg.channel.send(`Reaja em ${Emojis.Normais.Bot.Reload} para trocar a imagem.`, {embed: embed.setImage(img.url)}).then(m => {
-        m.react(Emojis.IDs.Normais.Bot.Reload)
-        const collector = m.createReactionCollector((r,u) => r.emoji.id === Emojis.IDs.Normais.Bot.Reload && u.id == msg.author.id, {time: 60000});
-        collector.on('collect', (r) => {
-          switch (r.emoji.id) {
-            case Emojis.IDs.Normais.Bot.Reload:
-              meow().then(img2 => {
-                r.remove(msg.author.id)
-                m.edit(embed.setImage(img2.url)).catch();
-              })
-            break;
-          }
-        })
-        setTimeout(() => {
-          m.edit('')
-          m.clearReactions();
-        }, 60000)
-      }).catch();
-    })
+  exec: async(msg) => {
+    msg.channel.startTyping(true);
+    const embed = new Embed(msg.author, 'Nekos.life');
+    return await meow().then(async(img) => {
+      return await msg.channel.send(`Reaja em ${msg.emoji.normais.bot.reload} para mudar a imagem, ou ${msg.emoji.normais.bot.fechar} para fechar a função.`, {
+        embed: embed.setImage(img.url)
+      }).then(msg.channel.stopTyping(true)).then(async(message) => {
+        message.react(msg.emoji.ids.normais.bot.reload).then(async() => {
+          message.react(msg.emoji.ids.normais.bot.fechar);
+          const collector = message.createReactionCollector((r,u) => (r.emoji.id === msg.emoji.ids.normais.bot.reload, msg.emoji.ids.normais.bot.fechar) && u.id == msg.author.id, {time: 60000});
+          await collector.on('collect', async(r) => {
+            switch (r.emoji.id) {
+              case msg.emoji.ids.normais.bot.reload:
+                await meow().then(async(r1) => {
+                  r.remove(msg.author.id)
+                  return await message.edit(`Reaja em ${msg.emoji.normais.bot.reload} para mudar a imagem, ou ${msg.emoji.normais.bot.fechar} para fechar a função.`, {
+                    embed: embed.setImage(r1.url)
+                  })
+                })
+              break;
+              case msg.emoji.ids.normais.bot.fechar:
+                message.edit('');
+                message.clearReactions();
+              break;
+            }
+          });
+          return setTimeout(() => {
+            message.edit('')
+            return message.clearReactions();
+          }, 60000)
+        });
+      });
+    });
   },
-  conf:{ aliases: ['gato','gatinho'], enable: true, cooldown: 60 },
+  conf:{ 
+    alias: ['gato','gatinho'],
+    enable: true,
+    cooldown: 60,
+    permissions: {
+      bot: ['SEND_MESSAGES','EMBED_LINKS', 'ATTACH_FILES','MANAGE_MESSAGES','USE_EXTERNAL_EMOJIS']
+    }
+  },
   help: {
     name: 'meow',
-    description: 'veja imagens de gatinhos',
+    desc: 'veja imagens de gatinhos',
     member: 'usuários',
     category: 'imagem',
     credit: ['[Nekos.life](https://nekos.life/)']

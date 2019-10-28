@@ -1,36 +1,45 @@
-const emojis = ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣'],
-  { Emojis } = require('../../../util/config');
+const emojis = ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣'];
 
 module.exports = {
-  exec: async(bot, msg, args) => {
-    const member = msg.mentions.users.first() || bot.users.get(args[0]);
-    if (!member) return msg.channel.send(`${Emojis.Normais.Discord.Outage} \`|\` ${msg.author}, mencione alguém para jogar.`);
-    if (member.id == msg.author.id || (member.id != bot.user.id && member.bot)) return;
+  exec: async(msg) => {
+    msg.channel.startTyping(true);
+    const member = msg.mentions.users.first() || msg.bot.users.get(msg.args[0]);
+    if (!member) return msg.channel.send(`${msg.emoji.normais.discord.outage} \`|\` ${msg.author}, mencione alguém para jogar.`).then(() => msg.channel.stopTyping(true));
+    if (member.id == msg.author.id || (member.id != msg.bot.user.id && member.bot)) return;
     let main = new jogo(msg.author, member)
-    msg.channel.send(`\`Jogo da velha:\` ${msg.author} contra ${member}`).then(async(message) => {
+    msg.channel.send(`\`Jogo da velha:\` ${msg.author} vs. ${member}!`).then(async(message) => {
+      msg.channel.stopTyping(true);
       setTimeout(async() => {
         message.delete()
         await msg.channel.send(main.embed_1).then(async(msg_1) => {
           await msg.channel.send(main.embed_2).then(async(msg_2) => {
             for (let i = 0; i < emojis.length; i++) { await msg_2.react(emojis[i]) }
-            let col = msg_2.createReactionCollector((r,u) => emojis.includes(r.emoji.name) && (u.id == msg.author.id || u.id == member.id || u.id == bot.user.id), {time:10*60*1000});
+            let col = msg_2.createReactionCollector((r,u) => emojis.includes(r.emoji.name) && (u.id == msg.author.id || u.id == member.id || u.id == msg.bot.user.id), {time:10*60*1000});
             col.on('collect', r => {
               if (r.users.last().id != main.turn.id) return;
-              r.remove(main.turn) && r.remove(bot.user);
-              if (member.id == bot.user.id ? main.jogarBot(emojis.indexOf(r.emoji.name)) : main.jogar(emojis.indexOf(r.emoji.name)) == 'g') col.stop();
-              msg_1.edit(main.embed_1).catch();
-              msg_2.edit(main.embed_2).catch();
+              r.remove(main.turn) && r.remove(msg.bot.user);
+              if (member.id == msg.bot.user.id ? main.jogarBot(emojis.indexOf(r.emoji.name)) : main.jogar(emojis.indexOf(r.emoji.name)) == 'g') col.stop();
+              msg_1.edit(main.embed_1)
+              msg_2.edit(main.embed_2)
             })
           })
         })
       }, 2000)
-    }).catch();
+    })
   },
-  conf:{ aliases: ['jogodavelha','jogo-da-velha','jdv'], enable: true, cooldown: 60 },
+  conf:{ 
+    alias: ['jogodavelha','jogo-da-velha','jdv'],
+    enable: true,
+    cooldown: 90,
+    permissions: {
+      bot: ['SEND_MESSAGES', 'ADD_REACTIONS','USE_EXTERNAL_EMOJIS']
+    },
+    manu: true
+  },
   help: {
     name: 'ttt',
-    description: 'jogue o jogo da velha com um amigo.',
-    usage: '[@usuário]',
+    desc: 'jogue o jogo da velha com um amigo',
+    usage: '<@usuário>',
     member: 'usuários',
     category: 'diversão',
     credit: ['[Acnologia](https://github.com/Acnologla)']
@@ -65,7 +74,7 @@ class jogo{
     if (this.casas[casa]) return null;
     this.casas[casa] = this.turn == this.x ? 1 : 2
     this.turn = this.turn == this.x ? this.o : this.x
-    this.embed_1 = `\`Turno de: \`${this.turn == `${this.o}[:o:]` ? `${this.o}[:o:]` : `${this.x}[:x:]`}`
+    this.embed_1 = `\`Turno de:\` ${this.turn === this.o ? `${this.o}[:o:]` : `${this.x}[:x:]`}`
     this.embed_2 = `${tabu(this.casas)}`;
     let venceu = g(this.casas)
     if (venceu) {

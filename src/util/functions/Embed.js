@@ -1,11 +1,14 @@
-const { RichEmbed } = require('discord.js');
-const { Colors } = require('../config');
+const { RichEmbed } = require('discord.js'),
+  { colors } = require('../config')
 
 module.exports = class Embed extends RichEmbed{
-  constructor(user, data = {}) {
+  constructor(user, credit, data = {}) {
     super(data)
-    this.setColor(Colors.PADRÃO)
-    if (user) this.setFooter(user.tag, user.displayAvatarURL).setTimestamp()
+    this.setColor(colors.PADRÃO)
+    if (user != false) 
+      return this.setFooter(`${user.username}${credit != false ? ` | ${credit}` : ''}`, user.displayAvatarURL).setTimestamp();
+    else if (credit != false) 
+      return this.setFooter(credit ? credit : '').setTimestamp();
   }
   setDescriptionArray (messages) {
     this.description = messages.map(lines => lines.filter(x => !!x).join('\n')).filter(x => !!x.length).join('\n\n')
