@@ -16,7 +16,7 @@ Informação|Comandos que demonstram informações de específicas coisas|6
 NSFW|Comandos para lhe ajudar quando estiver sozinho ( ͡° ͜ʖ ͡°)|21
 Owner|Comandos em que apenas meu criador pode usar|1
 Search|Comandos para fazer pesquisas|8
-Utilidades|Comandos em que lhe servir para algo|7
+Utilidade|Comandos em que pode lhe servir para algo|7
 
 <h2 align="center">Autor</h2>
 
