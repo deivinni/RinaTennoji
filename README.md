@@ -13,7 +13,7 @@ Diversões|Comandos para se descontrair|2
 Game|Comandos para peaquisar ou ver informações de alguns games|2
 Imagens|Comandos para criar imagens ou pesquisar imagens|13
 Informação|Comandos que demonstram informações de específicas coisas|6
-NSFW|Comandos para lhe ajudar quando estiver sozinho|21
+NSFW|Comandos para lhe ajudar quando estiver sozinho ( ͡° ͜ʖ ͡°)|21
 Owner|Comandos em que apenas meu criador pode usar|1
 Search|Comandos para fazer pesquisas|8
 Utilidades|Comandos em que lhe servir para algo|7
