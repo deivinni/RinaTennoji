@@ -26,16 +26,4 @@ module.exports = class Embed extends RichEmbed{
     this.url = url;
     return this;
   }
-  /**
-   * createFields (fields = []) {
-      fields.forEach(field => {
-        const name = field[0],
-          value = field[1],
-          inline = field[2];
-        value.map(lines => lines.filter(x => !!x).join('\n')).filter(x => !!x.length).join('\n\n');
-        this.fields.push({ name, value, inline });
-      })
-      return this;
-    }
-  */
 }
