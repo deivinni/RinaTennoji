@@ -1,4 +1,4 @@
-const { Embed } = require('../../../util/functions/'),
+const { Embed, FormatNumber, FormatDuration } = require('../../../util/functions/'),
   { 
     Apextab_API: { searchPlayer, getPlayerById }, Platform: { PC, XBOX_ONE, PS4 } 
   } = require('apextab-api');
@@ -20,14 +20,14 @@ module.exports = {
           .setDescriptionArray([
             [
               `${msg.emoji.normais.bot.seta}Lenda ativa: ${legend || 'nenhuma'}`,
-              `${msg.emoji.normais.bot.seta}Ranque global: ${globalrank || 'nenhum'}`,
-              `${msg.emoji.normais.bot.seta}Nível: ${level || 0}`,
-              `${msg.emoji.normais.bot.seta}Habilidade: ${skillratio || '0%'}`,
-              `${msg.emoji.normais.bot.seta}Partidas: ${matches || 0}`,
-              `${msg.emoji.normais.bot.seta}Abates: ${kills || 0}`,
-              `${msg.emoji.normais.bot.seta}Headshots: ${headshots || 0}`,
-              `${msg.emoji.normais.bot.seta}Visitas: ${visits || 'nenhuma'}`,
-              `${msg.emoji.normais.bot.seta}Tempo jogado: ${Math.ceil(utime / (1000 * 60 * 60 * 24)) || 0} dias`
+              `${msg.emoji.normais.bot.seta}Ranque global: ${FormatNumber(globalrank) || 'nenhum'}`,
+              `${msg.emoji.normais.bot.seta}Nível: ${FormatNumber(level) || 0}`,
+              `${msg.emoji.normais.bot.seta}Habilidade: ${skillratio+'%' || '0%'}`,
+              `${msg.emoji.normais.bot.seta}Partidas: ${FormatNumber(matches) || 0}`,
+              `${msg.emoji.normais.bot.seta}Abates: ${FormatNumber(kills) || 0}`,
+              `${msg.emoji.normais.bot.seta}Headshots: ${FormatNumber(headshots) || 0}`,
+              `${msg.emoji.normais.bot.seta}Visitas: ${FormatNumber(visits) || 'nenhuma'}`,
+              `${msg.emoji.normais.bot.seta}Tempo jogado: ${FormatDuration(utime) || '0 dias'}`
             ]
           ]).setThumbnail(avatar)
         })
